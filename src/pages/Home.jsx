@@ -14,6 +14,15 @@ import 'swiper/css/effect-fade';
 export default function Home() {
   const getProductsByCategory = (category) => products.filter(p => p.category === category);
 
+  // Added Image Mapping for Circular Categories
+  const categoryImages = {
+    Mens: "https://i.pinimg.com/originals/07/96/f1/0796f14dcd4b05bed07d2cd97263181d.jpg",
+    Womens: "https://tse2.mm.bing.net/th/id/OIP.Nn2Wi7IVDdmizKvTpT6QMQHaLH?w=824&h=1236&rs=1&pid=ImgDetMain&o=7&rm=3",
+    Boys: "https://tse3.mm.bing.net/th/id/OIP.z8vNqY2I8ZUFiy3a9FWHwAAAAA?rs=1&pid=ImgDetMain&o=7&rm=3",
+    Girls: "https://i.pinimg.com/originals/ad/4d/69/ad4d69c8c90e9ea21164de31d664aa63.jpg",
+    Kids: "https://tse1.explicit.bing.net/th/id/OIP.B5uIf_OAI0jEU2T0wRWyBgHaJ4?rs=1&pid=ImgDetMain&o=7&rm=3"
+  };
+
   const heroSlides = [
     {
       id: 'mens',
@@ -164,7 +173,12 @@ export default function Home() {
             <SwiperSlide key={cat}>
               <Link to={`/category/${cat.toLowerCase()}`} className="group block text-center">
                 <div className="relative aspect-square rounded-full overflow-hidden border-8 border-white dark:border-gray-700 shadow-2xl mx-auto w-44 h-44 mb-4">
-                  <img src={`https://via.placeholder.com/300x300?text=${cat}`} alt={cat} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                  {/* Updated Image Source from categoryImages object */}
+                  <img 
+                    src={categoryImages[cat]} 
+                    alt={cat} 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                  />
                 </div>
                 <h3 className="font-black text-gray-800 dark:text-white group-hover:text-primary transition-colors text-lg uppercase">{cat}</h3>
               </Link>
