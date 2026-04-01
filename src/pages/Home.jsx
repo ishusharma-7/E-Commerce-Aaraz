@@ -14,7 +14,6 @@ import 'swiper/css/effect-fade';
 export default function Home() {
   const getProductsByCategory = (category) => products.filter(p => p.category === category);
 
-  // Define the slider data for easy maintenance
   const heroSlides = [
     {
       id: 'mens',
@@ -68,17 +67,45 @@ export default function Home() {
     }
   ];
 
+  // Helper to render a Product Category Slider
+  const CategoryProductSlider = ({ title, category }) => (
+    <section>
+      <div className="flex items-end justify-between mb-8 border-b-2 border-gray-100 dark:border-gray-800 pb-4">
+        <div>
+          <h2 className="text-3xl font-black text-gray-800 dark:text-white uppercase tracking-tighter">{title}</h2>
+          <div className="h-1 w-20 bg-primary mt-2"></div>
+        </div>
+        <Link to={`/category/${category}`} className="bg-gray-100 dark:bg-gray-800 px-6 py-2 rounded-full text-xs font-black uppercase hover:bg-primary hover:text-white transition-all">View All</Link>
+      </div>
+      <Swiper
+        modules={[Autoplay, Navigation]}
+        spaceBetween={25}
+        slidesPerView={1}
+        navigation
+        autoplay={{ delay: 3500, disableOnInteraction: false }}
+        breakpoints={{
+          640: { slidesPerView: 2 },
+          1024: { slidesPerView: 4 },
+        }}
+      >
+        {getProductsByCategory(category).map(product => (
+          <SwiperSlide key={product.id}>
+            <ProductCard product={product} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </section>
+  );
+
   return (
-    <div className="space-y-12">
+    <div className="space-y-20">
       
-      {/* --- HERO SECTION: EXPANDED 5-SLIDE BANNERS --- */}
+      {/* --- HERO SECTION: BANNERS --- */}
       <section className="flex flex-col lg:flex-row gap-4 h-auto lg:h-[500px]">
-        
-        {/* 1. Large Auto Slider (70% Width) */}
         <div className="w-full lg:w-[70%] h-[350px] lg:h-full rounded-2xl overflow-hidden shadow-2xl border dark:border-gray-700">
           <Swiper
             modules={[Autoplay, Pagination, Navigation, EffectFade]}
-            effect={'fade'} // Professional fade transition
+            effect={'fade'}
             autoplay={{ delay: 4500, disableOnInteraction: false }}
             pagination={{ clickable: true, dynamicBullets: true }}
             navigation={true}
@@ -88,56 +115,35 @@ export default function Home() {
             {heroSlides.map((slide) => (
               <SwiperSlide key={slide.id}>
                 <div className={`relative h-full w-full ${slide.bgColor} dark:bg-gray-800 flex items-center px-8 lg:px-16 overflow-hidden`}>
-                   {/* Text Content */}
-                   <motion.div 
-                     initial={{ x: -50, opacity: 0 }}
-                     whileInView={{ x: 0, opacity: 1 }}
-                     transition={{ duration: 0.8 }}
-                     className="z-10 max-w-lg space-y-4"
-                   >
-                      <h3 className={`${slide.textColor} font-black tracking-[0.3em] uppercase text-sm`}>
-                        {slide.offer}
-                      </h3>
+                   <motion.div initial={{ x: -50, opacity: 0 }} whileInView={{ x: 0, opacity: 1 }} transition={{ duration: 0.8 }} className="z-10 max-w-lg space-y-4">
+                      <h3 className={`${slide.textColor} font-black tracking-[0.3em] uppercase text-sm`}>{slide.offer}</h3>
                       <h2 className="text-5xl lg:text-7xl font-black text-gray-900 dark:text-white leading-[0.9]">
                         {slide.title} <br/> 
-                        <span className="text-2xl lg:text-4xl font-light tracking-tight text-gray-500 dark:text-gray-400">
-                          {slide.subtitle}
-                        </span>
+                        <span className="text-2xl lg:text-4xl font-light tracking-tight text-gray-500 dark:text-gray-400">{slide.subtitle}</span>
                       </h2>
-                      <Link 
-                        to={`/category/${slide.id}`} 
-                        className="inline-block bg-gray-900 dark:bg-primary text-white px-10 py-4 rounded-full font-bold text-sm tracking-widest hover:scale-105 transition-transform shadow-lg"
-                      >
+                      <Link to={`/category/${slide.id}`} className="inline-block bg-gray-900 dark:bg-primary text-white px-10 py-4 rounded-full font-bold text-sm tracking-widest hover:scale-105 transition-transform shadow-lg">
                         {slide.btnText}
                       </Link>
                    </motion.div>
-
-                   {/* Image Content */}
-                   <img 
-                     src={slide.img} 
-                     className="absolute right-0 bottom-0 h-full w-[65%] object-cover object-center opacity-90 md:opacity-100 mask-gradient-left" 
-                     alt={slide.title} 
-                   />
+                   <img src={slide.img} className="absolute right-0 bottom-0 h-full w-[65%] object-cover object-center opacity-90 md:opacity-100" style={{maskImage: 'linear-gradient(to right, transparent, black 40%)'}} alt={slide.title} />
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
         
-        {/* 2. Side Promotional Banners (30% Width - Unchanged) */}
         <div className="w-full lg:w-[30%] flex flex-col gap-4 h-full">
           <motion.div whileHover={{ scale: 1.02 }} className="h-[242px] rounded-2xl overflow-hidden relative group cursor-pointer shadow-lg">
             <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1470&auto=format&fit=crop" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Sale" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6 text-white">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6 text-white text-left">
               <span className="text-xs font-bold bg-primary w-fit px-2 py-1 rounded mb-2">LIMITED TIME</span>
               <h3 className="text-2xl font-black uppercase">Fashion Sale</h3>
-              <p className="text-xs opacity-80">Up to 50% Off on Premium Brands</p>
+              <p className="text-xs opacity-80 text-left">Up to 50% Off</p>
             </div>
           </motion.div>
-
           <motion.div whileHover={{ scale: 1.02 }} className="h-[242px] rounded-2xl overflow-hidden relative group cursor-pointer shadow-lg">
             <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1470&auto=format&fit=crop" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Trends" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6 text-white">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6 text-white text-left">
               <p className="text-xs font-medium italic text-primary">New Trend 2026</p>
               <h3 className="text-2xl font-black uppercase">Women's Hub</h3>
               <Link to="/category/womens" className="mt-2 text-xs font-bold underline hover:text-primary transition-colors">SHOP COLLECTION</Link>
@@ -146,8 +152,76 @@ export default function Home() {
         </div>
       </section>
 
-      {/* --- REST OF THE PAGE: CATEGORIES, PRODUCTS, ETC --- */}
-      {/* (Keep previous category and product slider code here) */}
+      {/* --- CATEGORY CIRCULAR SWIPER --- */}
+      <section className="py-12 bg-gray-100/50 dark:bg-gray-800/30 rounded-[3rem] p-8 border border-white dark:border-gray-800 shadow-inner">
+        <div className="text-center mb-10">
+            <h4 className="text-primary font-bold tracking-[0.4em] uppercase text-xs mb-2">Discover</h4>
+            <h2 className="text-4xl font-black text-gray-800 dark:text-white uppercase tracking-tighter">Shop by Category</h2>
+        </div>
+
+        <Swiper modules={[Autoplay]} spaceBetween={30} slidesPerView={2} autoplay={{ delay: 3000 }} breakpoints={{ 640: { slidesPerView: 3 }, 1024: { slidesPerView: 5 } }}>
+          {['Mens', 'Womens', 'Boys', 'Girls', 'Kids'].map(cat => (
+            <SwiperSlide key={cat}>
+              <Link to={`/category/${cat.toLowerCase()}`} className="group block text-center">
+                <div className="relative aspect-square rounded-full overflow-hidden border-8 border-white dark:border-gray-700 shadow-2xl mx-auto w-44 h-44 mb-4">
+                  <img src={`https://via.placeholder.com/300x300?text=${cat}`} alt={cat} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                </div>
+                <h3 className="font-black text-gray-800 dark:text-white group-hover:text-primary transition-colors text-lg uppercase">{cat}</h3>
+              </Link>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </section>
+
+      {/* --- PRODUCT AUTO-SLIDERS FOR ALL CATEGORIES --- */}
+      <div className="space-y-24">
+        <CategoryProductSlider title="Men's Top Section" category="mens" />
+        <CategoryProductSlider title="Women's Hub" category="womens" />
+        <CategoryProductSlider title="Boy's Choice" category="boys" />
+        <CategoryProductSlider title="Girl's Selection" category="girls" />
+      </div>
+
+      {/* --- TESTIMONIAL SLIDER WITH UNIQUE PHOTOS --- */}
+      <section className="relative py-28 bg-gray-900 rounded-[4rem] overflow-hidden shadow-2xl">
+        <div className="absolute inset-0 opacity-20 grayscale scale-110">
+           <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1470&auto=format&fit=crop" className="w-full h-full object-cover" alt="Fashion Store" />
+        </div>
+        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
+          <h2 className="text-4xl font-black text-primary mb-12 uppercase tracking-tighter">Customer Reviews</h2>
+          <Swiper modules={[Autoplay, Pagination]} autoplay={{ delay: 5000 }} loop={true} pagination={{ clickable: true }}>
+            {testimonials.map((t, index) => (
+              <SwiperSlide key={t.id} className="pb-14">
+                <div className="mb-10 flex justify-center">
+                   <div className="p-1 rounded-full bg-gradient-to-tr from-primary to-blue-500 shadow-2xl">
+                      <div className="w-24 h-24 rounded-full border-4 border-gray-900 overflow-hidden">
+                        {/* Dynamic photo based on the index/ID */}
+                         <img src={`https://i.pravatar.cc/150?u=${t.id}`} alt={t.name} />
+                      </div>
+                   </div>
+                </div>
+                <p className="text-xl md:text-3xl italic leading-relaxed text-gray-100 font-light px-4">"{t.review}"</p>
+                <div className="mt-8">
+                    <h4 className="font-black uppercase tracking-[0.3em] text-white">— {t.name}</h4>
+                    <p className="text-xs text-primary font-bold mt-1 uppercase">Verified Customer</p>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </section>
+
+      {/* --- BRAND SLIDER --- */}
+      <section className="py-16">
+        <Swiper modules={[Autoplay]} spaceBetween={50} slidesPerView={3} autoplay={{ delay: 2000 }} breakpoints={{ 768: { slidesPerView: 4 }, 1024: { slidesPerView: 6 } }}>
+          {brands.map(brand => (
+            <SwiperSlide key={brand.id}>
+              <div className="flex justify-center items-center h-24 opacity-30 hover:opacity-100 transition-all cursor-pointer">
+                 <img src={brand.logo} alt={brand.name} className="max-h-12 grayscale hover:grayscale-0" />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </section>
 
     </div>
   );
