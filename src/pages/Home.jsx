@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation, EffectFade } from 'swiper/modules';
-import { motion, AnimatePresence } from 'framer-motion'; // Added AnimatePresence
-import { useState, useEffect } from 'react'; // Added hooks for scroll logic
-import { FaChevronUp } from 'react-icons/fa'; // Icon for upward navigation
+import { motion, AnimatePresence } from 'framer-motion'; 
+import { useState, useEffect } from 'react'; 
+import { FaChevronUp } from 'react-icons/fa'; 
 import ProductCard from '../components/ui/ProductCard';
 import { products, testimonials, brands } from '../utils/mockData';
 
@@ -48,37 +48,44 @@ export default function Home() {
     { id: 'kids', title: "BABY & KIDS", subtitle: "COZY COMFORT", offer: "SOFT ORGANIC COTTON", btnText: "SHOP INFANTS", bgColor: "bg-yellow-50", img: "https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=1470&auto=format&fit=crop", textColor: "text-amber-600" }
   ];
 
-  const CategoryProductSlider = ({ title, category }) => (
-    <section>
-      <div className="flex items-end justify-between mb-8 border-b-2 border-gray-100 dark:border-gray-800 pb-4">
-        <div>
-          <h2 className="text-3xl font-black text-gray-800 dark:text-white uppercase tracking-tighter">{title}</h2>
-          <div className="h-1 w-20 bg-primary mt-2"></div>
+  const CategoryProductSlider = ({ title, category }) => {
+    const categoryProducts = getProductsByCategory(category);
+    return (
+      <section className="transform-gpu">
+        <div className="flex items-end justify-between mb-8 border-b-2 border-gray-100 dark:border-gray-800 pb-4">
+          <div>
+            <h2 className="text-3xl font-black text-gray-800 dark:text-white uppercase tracking-tighter">{title}</h2>
+            <div className="h-1 w-20 bg-primary mt-2"></div>
+          </div>
+          <Link to={`/category/${category}`} className="bg-gray-100 dark:bg-gray-800 px-6 py-2 rounded-full text-xs font-black uppercase hover:bg-primary hover:text-white transition-all">View All</Link>
         </div>
-        <Link to={`/category/${category}`} className="bg-gray-100 dark:bg-gray-800 px-6 py-2 rounded-full text-xs font-black uppercase hover:bg-primary hover:text-white transition-all">View All</Link>
-      </div>
-      <Swiper
-        modules={[Autoplay, Navigation]}
-        spaceBetween={25}
-        slidesPerView={1}
-        navigation
-        loop={true}
-        autoplay={{ delay: 3500, disableOnInteraction: false, pauseOnMouseEnter: true }}
-        breakpoints={{ 640: { slidesPerView: 2 }, 1024: { slidesPerView: 4 } }}
-      >
-        {getProductsByCategory(category).map(product => (
-          <SwiperSlide key={product.id}>
-            <ProductCard product={product} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </section>
-  );
+        <Swiper
+          modules={[Autoplay, Navigation]}
+          spaceBetween={25}
+          slidesPerView={1}
+          navigation
+          // FIX: Only loop if we have enough products to fill the view breakpoints
+          loop={categoryProducts.length > 4} 
+          autoplay={{ delay: 3500, disableOnInteraction: false, pauseOnMouseEnter: true }}
+          breakpoints={{
+            640: { slidesPerView: 2 },
+            1024: { slidesPerView: 4 },
+          }}
+        >
+          {categoryProducts.map(product => (
+            <SwiperSlide key={product.id}>
+              <ProductCard product={product} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </section>
+    );
+  };
 
   return (
-    <div className="space-y-20 relative">
+    <div className="space-y-20 relative overflow-x-hidden">
       
-      {/* --- MOBILE UPWARD NAVIGATION (Burger Scrolling Option) --- */}
+      {/* --- MOBILE UPWARD NAVIGATION --- */}
       <AnimatePresence>
         {showScroll && (
           <motion.button
@@ -94,7 +101,7 @@ export default function Home() {
       </AnimatePresence>
 
       {/* --- HERO SECTION --- */}
-      <section className="flex flex-col lg:flex-row gap-4 h-auto lg:h-[500px]">
+      <section className="flex flex-col lg:flex-row gap-4 h-auto lg:h-[500px] transform-gpu">
         <div className="w-full lg:w-[70%] h-[350px] lg:h-full rounded-2xl overflow-hidden shadow-2xl border dark:border-gray-700">
           <Swiper
             modules={[Autoplay, Pagination, Navigation, EffectFade]}
@@ -118,14 +125,14 @@ export default function Home() {
                         {slide.btnText}
                       </Link>
                    </motion.div>
-                   <img src={slide.img} className="absolute right-0 bottom-0 h-full w-[65%] object-cover object-center opacity-90 md:opacity-100" style={{maskImage: 'linear-gradient(to right, transparent, black 40%)'}} alt={slide.title} />
+                   <img src={slide.img} className="absolute right-0 bottom-0 h-full w-[65%] object-cover object-center opacity-90 md:opacity-100 will-change-transform" style={{maskImage: 'linear-gradient(to right, transparent, black 40%)'}} alt={slide.title} />
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
         
-        <div className="w-full lg:w-[30%] flex flex-col gap-4 h-full">
+        <div className="w-full lg:w-[30%] flex flex-col gap-4 h-full transform-gpu">
           <motion.div whileHover={{ scale: 1.02 }} className="h-[242px] rounded-2xl overflow-hidden relative group cursor-pointer shadow-lg">
             <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1470&auto=format&fit=crop" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Sale" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6 text-white text-left">
@@ -145,8 +152,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* --- CATEGORY CIRCULAR SWIPER (FIXED OVERLAP) --- */}
-      <section className="py-12 bg-gray-100/50 dark:bg-gray-800/30 rounded-[3rem] p-4 md:p-8 border border-white dark:border-gray-800 shadow-inner">
+      {/* --- CATEGORY CIRCULAR SWIPER --- */}
+      <section className="py-12 bg-gray-100/50 dark:bg-gray-800/30 rounded-[3rem] p-4 md:p-8 border border-white dark:border-gray-800 shadow-inner transform-gpu">
         <div className="text-center mb-10">
             <h4 className="text-primary font-bold tracking-[0.4em] uppercase text-xs mb-2">Discover</h4>
             <h2 className="text-3xl md:text-4xl font-black text-gray-800 dark:text-white uppercase tracking-tighter">Shop by Category</h2>
@@ -154,21 +161,26 @@ export default function Home() {
 
         <Swiper 
           modules={[Autoplay]} 
-          spaceBetween={15} // Reduced space for mobile
-          slidesPerView={2.2} // Show a partial slide to indicate scrollability
-          autoplay={{ delay: 3000 }} 
-          loop={true}
-          breakpoints={{ 640: { slidesPerView: 3, spaceBetween: 20 }, 1024: { slidesPerView: 5, spaceBetween: 30 } }}
+          spaceBetween={15}
+          slidesPerView={2.2}
+          autoplay={{ delay: 3000, disableOnInteraction: false }} 
+          // FIX: Set to false if items <= max slidesPerView (5)
+          loop={['Mens', 'Womens', 'Boys', 'Girls', 'Kids'].length > 5} 
+          observer={true}
+          observeParents={true}
+          breakpoints={{ 
+            640: { slidesPerView: 3, spaceBetween: 20 }, 
+            1024: { slidesPerView: 5, spaceBetween: 30 } 
+          }}
         >
           {['Mens', 'Womens', 'Boys', 'Girls', 'Kids'].map(cat => (
             <SwiperSlide key={cat}>
               <Link to={`/category/${cat.toLowerCase()}`} className="group block text-center">
-                {/* Responsive Image size: w-28 on mobile, w-44 on desktop */}
                 <div className="relative aspect-square rounded-full overflow-hidden border-4 md:border-8 border-white dark:border-gray-700 shadow-xl mx-auto w-28 h-28 md:w-44 md:h-44 mb-4">
                   <img 
                     src={categoryImages[cat]} 
                     alt={cat} 
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 will-change-transform" 
                   />
                 </div>
                 <h3 className="font-black text-gray-800 dark:text-white group-hover:text-primary transition-colors text-sm md:text-lg uppercase">{cat}</h3>
@@ -179,7 +191,7 @@ export default function Home() {
       </section>
 
       {/* --- PRODUCT AUTO-SLIDERS --- */}
-      <div className="space-y-24">
+      <div className="space-y-24 transform-gpu">
         <CategoryProductSlider title="Men's Top Section" category="mens" />
         <CategoryProductSlider title="Women's Hub" category="womens" />
         <CategoryProductSlider title="Boy's Choice" category="boys" />
@@ -187,13 +199,18 @@ export default function Home() {
       </div>
 
       {/* --- TESTIMONIALS --- */}
-      <section className="relative py-28 bg-gray-900 rounded-[3rem] md:rounded-[4rem] overflow-hidden shadow-2xl">
+      <section className="relative py-28 bg-gray-900 rounded-[3rem] md:rounded-[4rem] overflow-hidden shadow-2xl transform-gpu">
         <div className="absolute inset-0 opacity-20 grayscale scale-110">
            <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1470&auto=format&fit=crop" className="w-full h-full object-cover" alt="Fashion Store" />
         </div>
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-black text-primary mb-12 uppercase tracking-tighter">Customer Reviews</h2>
-          <Swiper modules={[Autoplay, Pagination]} autoplay={{ delay: 5000 }} loop={true} pagination={{ clickable: true }}>
+          <Swiper 
+            modules={[Autoplay, Pagination]} 
+            autoplay={{ delay: 5000 }} 
+            loop={testimonials.length > 1} 
+            pagination={{ clickable: true }}
+          >
             {testimonials.map((t) => (
               <SwiperSlide key={t.id} className="pb-14">
                 <div className="mb-10 flex justify-center">
@@ -215,8 +232,19 @@ export default function Home() {
       </section>
 
       {/* --- BRAND SLIDER --- */}
-      <section className="py-16">
-        <Swiper modules={[Autoplay]} spaceBetween={20} slidesPerView={3} autoplay={{ delay: 2000 }} loop={true} breakpoints={{ 768: { slidesPerView: 4 }, 1024: { slidesPerView: 6 } }}>
+      <section className="py-16 transform-gpu">
+        <Swiper 
+          modules={[Autoplay]} 
+          spaceBetween={20} 
+          slidesPerView={3} 
+          autoplay={{ delay: 2000 }} 
+          // FIX: Only loop if brands exceed max view (6)
+          loop={brands.length > 6} 
+          breakpoints={{ 
+            768: { slidesPerView: 4 }, 
+            1024: { slidesPerView: 6 } 
+          }}
+        >
           {brands.map(brand => (
             <SwiperSlide key={brand.id}>
               <div className="flex justify-center items-center h-16 md:h-24 opacity-30 hover:opacity-100 transition-all cursor-pointer">

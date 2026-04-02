@@ -131,6 +131,8 @@ export default function Navbar() {
           <div className="flex w-full bg-gray-100 dark:bg-gray-800 rounded-md p-2 border border-transparent focus-within:border-primary transition-all">
             <input 
               type="text" 
+              name="search" // <--- ADD THIS LINE
+              id="search-input" // <--- ALSO GOOD TO ADD AN ID
               placeholder="Search products..." 
               value={searchQuery}
               onChange={handleSearchChange}
