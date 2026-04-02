@@ -21,13 +21,49 @@ export const AppProvider = ({ children }) => {
   }, [theme]);
 
   const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
-  const login = (userData) => setUser(userData);
-  const logout = () => setUser(null);
+  
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem('user');
+  };
+
+  const registerUser = (userData) => {
+    const existingUsers = JSON.parse(localStorage.getItem('all_users')) || [];
+    if (existingUsers.find(u => u.email === userData.email)) {
+      alert("User already exists!");
+      return false;
+    }
+    const updatedUsers = [...existingUsers, userData];
+    localStorage.setItem('all_users', JSON.stringify(updatedUsers));
+    setUser(userData);
+    return true;
+  };
+
+  const loginUser = (email, password) => {
+    const existingUsers = JSON.parse(localStorage.getItem('all_users')) || [];
+    const foundUser = existingUsers.find(u => u.email === email && u.password === password);
+    if (foundUser) {
+      setUser(foundUser);
+      return true;
+    }
+    alert("Invalid credentials");
+    return false;
+  };
+
+  const updateUserInfo = (updatedData) => {
+    setUser(updatedData);
+    const allUsers = JSON.parse(localStorage.getItem('all_users')) || [];
+    const updatedUsers = allUsers.map(u => 
+      u.email === updatedData.email ? updatedData : u
+    );
+    localStorage.setItem('all_users', JSON.stringify(updatedUsers));
+    alert("Profile Updated Successfully!");
+  };
 
   const addToCart = (product) => setCart([...cart, { ...product, cartId: Date.now() }]);
   const removeFromCart = (cartId) => setCart(cart.filter(item => item.cartId !== cartId));
   const clearCart = () => setCart([]);
-
+  
   const toggleWishlist = (product) => {
     if (wishlist.find(item => item.id === product.id)) {
       setWishlist(wishlist.filter(item => item.id !== product.id));
@@ -37,7 +73,13 @@ export const AppProvider = ({ children }) => {
   };
 
   const placeOrder = (address) => {
-    const newOrder = { id: Math.floor(Math.random() * 100000), items: cart, address, status: 'Confirmed', date: new Date().toISOString() };
+    const newOrder = { 
+      id: Math.floor(Math.random() * 100000), 
+      items: [...cart], 
+      address, 
+      status: 'Confirmed', 
+      date: new Date().toISOString() 
+    };
     setOrders([newOrder, ...orders]);
     clearCart();
     return newOrder;
@@ -45,7 +87,7 @@ export const AppProvider = ({ children }) => {
 
   return (
     <AppContext.Provider value={{
-      theme, toggleTheme, user, login, logout,
+      theme, toggleTheme, user, loginUser, registerUser, logout, updateUserInfo,
       cart, addToCart, removeFromCart, clearCart,
       wishlist, toggleWishlist, orders, placeOrder
     }}>

@@ -19,14 +19,14 @@ export default function Cart() {
               <h3 className="dark:text-white">{item.name}</h3>
             </div>
             <div className="flex gap-4 items-center">
-              <span className="font-bold dark:text-white">${item.price}</span>
+              <span className="font-bold dark:text-white">₹{item.price}</span>
               <button onClick={() => removeFromCart(item.cartId)} className="text-red-500"><FaTrash /></button>
             </div>
           </div>
         ))}
       </div>
       <div className="flex justify-between items-center p-6 bg-white dark:bg-gray-800 rounded-lg">
-        <div className="text-xl dark:text-white">Total: <span className="text-primary font-bold">${total.toFixed(2)}</span></div>
+        <div className="text-xl dark:text-white">Total: <span className="text-primary font-bold">₹{total.toFixed(2)}</span></div>
         <button onClick={() => navigate('/checkout')} className="bg-green-500 text-white px-8 py-3 rounded-md font-bold">Checkout</button>
       </div>
     </div>
