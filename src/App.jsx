@@ -9,6 +9,7 @@ import Checkout from './pages/Checkout';
 import Wishlist from './pages/Wishlist';
 import Account from './pages/Account';
 import Auth from './pages/Auth';
+import About from './pages/About';
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
               <Route path="/wishlist" element={<Wishlist />} />
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/account" element={<Account />} />
+              <Route path="/about" element={<About />} />
             </Routes>
           </main>
           <Footer />

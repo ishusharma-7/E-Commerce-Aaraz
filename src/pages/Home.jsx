@@ -91,7 +91,12 @@ export default function Home() {
         spaceBetween={25}
         slidesPerView={1}
         navigation
-        autoplay={{ delay: 3500, disableOnInteraction: false }}
+        loop={true} // Enabled Endless Loop
+        autoplay={{ 
+          delay: 3500, 
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true 
+        }}
         breakpoints={{
           640: { slidesPerView: 2 },
           1024: { slidesPerView: 4 },
@@ -168,12 +173,18 @@ export default function Home() {
             <h2 className="text-4xl font-black text-gray-800 dark:text-white uppercase tracking-tighter">Shop by Category</h2>
         </div>
 
-        <Swiper modules={[Autoplay]} spaceBetween={30} slidesPerView={2} autoplay={{ delay: 3000 }} breakpoints={{ 640: { slidesPerView: 3 }, 1024: { slidesPerView: 5 } }}>
+        <Swiper 
+          modules={[Autoplay]} 
+          spaceBetween={30} 
+          slidesPerView={2} 
+          autoplay={{ delay: 3000 }} 
+          loop={true} // Enabled Endless Loop
+          breakpoints={{ 640: { slidesPerView: 3 }, 1024: { slidesPerView: 5 } }}
+        >
           {['Mens', 'Womens', 'Boys', 'Girls', 'Kids'].map(cat => (
             <SwiperSlide key={cat}>
               <Link to={`/category/${cat.toLowerCase()}`} className="group block text-center">
                 <div className="relative aspect-square rounded-full overflow-hidden border-8 border-white dark:border-gray-700 shadow-2xl mx-auto w-44 h-44 mb-4">
-                  {/* Updated Image Source from categoryImages object */}
                   <img 
                     src={categoryImages[cat]} 
                     alt={cat} 
@@ -208,7 +219,6 @@ export default function Home() {
                 <div className="mb-10 flex justify-center">
                    <div className="p-1 rounded-full bg-gradient-to-tr from-primary to-blue-500 shadow-2xl">
                       <div className="w-24 h-24 rounded-full border-4 border-gray-900 overflow-hidden">
-                        {/* Dynamic photo based on the index/ID */}
                          <img src={`https://i.pravatar.cc/150?u=${t.id}`} alt={t.name} />
                       </div>
                    </div>
@@ -226,7 +236,14 @@ export default function Home() {
 
       {/* --- BRAND SLIDER --- */}
       <section className="py-16">
-        <Swiper modules={[Autoplay]} spaceBetween={50} slidesPerView={3} autoplay={{ delay: 2000 }} breakpoints={{ 768: { slidesPerView: 4 }, 1024: { slidesPerView: 6 } }}>
+        <Swiper 
+          modules={[Autoplay]} 
+          spaceBetween={50} 
+          slidesPerView={3} 
+          autoplay={{ delay: 2000 }} 
+          loop={true} // Enabled Endless Loop
+          breakpoints={{ 768: { slidesPerView: 4 }, 1024: { slidesPerView: 6 } }}
+        >
           {brands.map(brand => (
             <SwiperSlide key={brand.id}>
               <div className="flex justify-center items-center h-24 opacity-30 hover:opacity-100 transition-all cursor-pointer">

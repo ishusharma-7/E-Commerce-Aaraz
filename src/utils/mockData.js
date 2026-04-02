@@ -1,21 +1,95 @@
 export const products = [
-  { id: 1, name: "Premium Cotton T-Shirt", category: "mens", price: 25.99, image: "https://via.placeholder.com/300x400?text=Mens+T-Shirt" },
-  { id: 2, name: "Slim Fit Jeans", category: "mens", price: 49.99, image: "https://via.placeholder.com/300x400?text=Mens+Jeans" },
-  { id: 5, name: "Floral Summer Dress", category: "womens", price: 39.99, image: "https://via.placeholder.com/300x400?text=Womens+Dress" },
-  { id: 6, name: "High-Waisted Trousers", category: "womens", price: 45.00, image: "https://via.placeholder.com/300x400?text=Womens+Trousers" },
-  { id: 9, name: "Graphic Pullover", category: "boys", price: 29.99, image: "https://via.placeholder.com/300x400?text=Boys+Pullover" },
-  { id: 11, name: "Party Sparkle Dress", category: "girls", price: 45.99, image: "https://via.placeholder.com/300x400?text=Girls+Dress" },
-  { id: 13, name: "Cozy Sleepsuit", category: "kids", price: 18.99, image: "https://via.placeholder.com/300x400?text=Kids+Sleepsuit" }
+  // --- MENS CATEGORY (15 Products) ---
+  { id: 101, name: "Classic Navy Blue Blazer", category: "mens", price: 4599, image: "https://i.pinimg.com/736x/1a/24/8c/1a248ce6b980cf7815abd8e43a70a482.jpg" },
+  { id: 102, name: "Slim Fit White Formal Shirt", category: "mens", price: 1299, image: "https://i.pinimg.com/736x/ba/79/cc/ba79cc13e7d7dc3f406a5a65b94a08c7.jpg" },
+  { id: 103, name: "Urban Streetwear Hoodie", category: "mens", price: 1899, image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=500&auto=format&fit=crop" },
+  { id: 104, name: "Dark Wash Denim Jeans", category: "mens", price: 2499, image: "https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=500&auto=format&fit=crop" },
+  { id: 105, name: "Cotton Chino Shorts", category: "mens", price: 899, image: "https://i.pinimg.com/736x/ab/ed/14/abed140cea340d4e25009420e7792c5c.jpg" },
+  { id: 106, name: "Hand-Stitched Leather Loafers", category: "mens", price: 3200, image: "https://i.pinimg.com/1200x/d3/7e/f9/d37ef9037e3d4d55b8d8a9fa240cd0b7.jpg" },
+  { id: 107, name: "Traditional Silk Kurta", category: "mens", price: 2199, image: "https://i.pinimg.com/736x/fd/06/17/fd0617d92b00b3629e2bbf5e6d92c34b.jpg" },
+  { id: 108, name: "Graphic Print Oversized Tee", category: "mens", price: 799, image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=500&auto=format&fit=crop" },
+  { id: 109, name: "Khaki Cargo Trackpants", category: "mens", price: 1450, image: "https://images.unsplash.com/photo-1617114919297-3c8ddb01f599?q=80&w=500&auto=format&fit=crop" },
+  { id: 110, name: "Biker Leather Jacket", category: "mens", price: 5499, image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=500&auto=format&fit=crop" },
+  { id: 111, name: "Smart Polo T-Shirt", category: "mens", price: 999, image: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?q=80&w=500&auto=format&fit=crop" },
+  { id: 112, name: "Checkered Flannel Shirt", category: "mens", price: 1599, image: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=500&auto=format&fit=crop" },
+  { id: 113, name: "Minimalist Wrist Watch", category: "mens", price: 3500, image: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?q=80&w=500&auto=format&fit=crop" },
+  { id: 114, name: "Canvas High-Top Sneakers", category: "mens", price: 2899, image: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?q=80&w=500&auto=format&fit=crop" },
+  { id: 115, name: "Woven Leather Belt", category: "mens", price: 699, image: "https://i.pinimg.com/1200x/0e/fc/7b/0efc7b99876bdcebcd0fc29285db8193.jpg" },
+
+  // --- WOMENS CATEGORY (15 Products) ---
+  { id: 201, name: "Bohemian Maxi Dress", category: "womens", price: 2899, image: "https://i.pinimg.com/736x/6b/52/28/6b522881f58019b58a9501a912b6bd4f.jpg" },
+  { id: 202, name: "Embroidered Georgette Saree", category: "womens", price: 4200, image: "https://i.pinimg.com/736x/23/52/40/235240596ecab0e1b7992ccf8700a8b2.jpg" },
+  { id: 203, name: "Satin Silk Wrap Top", category: "womens", price: 1499, image: "https://i.pinimg.com/736x/55/57/a8/5557a878172390596784aa4b625e6a41.jpg" },
+  { id: 204, name: "High-Rise Flare Jeans", category: "womens", price: 1999, image: "https://i.pinimg.com/1200x/d5/bd/88/d5bd8879123465015c675e5762fac4de.jpg" },
+  { id: 205, name: "Designer Leather Tote", category: "womens", price: 3499, image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=500&auto=format&fit=crop" },
+  { id: 206, name: "Pastel Pencil Skirt", category: "womens", price: 1199, image: "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?q=80&w=500&auto=format&fit=crop" },
+  { id: 207, name: "Diamond Studded Heels", category: "womens", price: 2500, image: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?q=80&w=500&auto=format&fit=crop" },
+  { id: 208, name: "Woolen Cable Knit Sweater", category: "womens", price: 2299, image: "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?q=80&w=500&auto=format&fit=crop" },
+  { id: 209, name: "Cotton Anarkali Kurti", category: "womens", price: 1799, image: "https://i.pinimg.com/736x/ed/43/08/ed4308c9b410e53870888d0939729551.jpg" },
+  { id: 210, name: "Gold Plated Jhumkas", category: "womens", price: 850, image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=500&auto=format&fit=crop" },
+  { id: 211, name: "Velvet Party Gown", category: "womens", price: 5999, image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?q=80&w=500&auto=format&fit=crop" },
+  { id: 212, name: "Denim Jacket with Sherpa", category: "womens", price: 2799, image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=500&auto=format&fit=crop" },
+  { id: 213, name: "Oversized Summer Hat", category: "womens", price: 599, image: "https://i.pinimg.com/1200x/fd/70/05/fd70055099ba0dab22af059816aa256f.jpg" },
+  { id: 214, name: "Floral Print Culottes", category: "womens", price: 1350, image: "https://images.unsplash.com/photo-1582533561751-ef6f6ab93a2e?q=80&w=500&auto=format&fit=crop" },
+  { id: 215, name: "Chiffon Silk Scarf", category: "womens", price: 499, image: "https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?q=80&w=500&auto=format&fit=crop" },
+
+  // --- BOYS CATEGORY (12 Products) ---
+  { id: 301, name: "Kids Sporty Polo Shirt", category: "boys", price: 699, image: "https://i.pinimg.com/1200x/98/a4/fd/98a4fdce76afa34d220bb72a9e8b5290.jpg" },
+  { id: 302, name: "Cotton Cargo Shorts", category: "boys", price: 850, image: "https://i.pinimg.com/1200x/29/cf/da/29cfda6d36d738d539fee52ebbcebb56.jpg" },
+  { id: 303, name: "Marvel Superhero Tee", category: "boys", price: 499, image: "https://images.unsplash.com/photo-1533512930330-4ac257c86793?q=80&w=500&auto=format&fit=crop" },
+  { id: 304, name: "Denim Dungarees", category: "boys", price: 1499, image: "https://i.pinimg.com/1200x/81/df/4c/81df4c56aac25de0c242925359d365fb.jpg" },
+  { id: 305, name: "Junior Jogger Set", category: "boys", price: 1299, image: "https://i.pinimg.com/1200x/a0/a5/72/a0a572dd95a5129eeabed4781161fcc0.jpg" },
+  { id: 306, name: "Hooded Winter Jacket", category: "boys", price: 1850, image: "https://i.pinimg.com/1200x/22/61/4b/22614b49a1474a701991ac5baf1c568f.jpg" },
+  { id: 307, name: "Light-up LED Sneakers", category: "boys", price: 1199, image: "https://i.pinimg.com/736x/8e/22/64/8e22641482260baa1a133d3dc63555a6.jpg" },
+  { id: 308, name: "Formal Bowtie Suit", category: "boys", price: 2499, image: "https://i.pinimg.com/1200x/88/6c/c6/886cc6e297959c3c4f9298b639eeb7a8.jpg" },
+  { id: 309, name: "Striped Cotton Pajamas", category: "boys", price: 799, image: "https://i.pinimg.com/1200x/96/3b/1d/963b1daffd7bb217a6f1a53dbc58fbb8.jpg" },
+  { id: 310, name: "Graphic Baseball Cap", category: "boys", price: 350, image: "https://i.pinimg.com/1200x/85/9f/2a/859f2a057b5fa45df97af290a3faf91c.jpg" },
+  { id: 311, name: "Patterned Swim Trunks", category: "boys", price: 599, image: "https://i.pinimg.com/736x/74/39/f4/7439f483c4b8d1c7c59d48772c75dd97.jpg" },
+  { id: 312, name: "Dinosaur Print Sweater", category: "boys", price: 950, image: "https://i.pinimg.com/1200x/1a/1c/6b/1a1c6b1fea5db731fdea689637d53880.jpg" },
+
+  // --- GIRLS CATEGORY (12 Products) ---
+  { id: 401, name: "Pink Princess Gown", category: "girls", price: 2599, image: "https://i.pinimg.com/736x/5b/3f/60/5b3f60915ceeaf9cdb7d22df81e4fa3c.jpg" },
+  { id: 402, name: "Floral Cotton Frock", category: "girls", price: 899, image: "https://i.pinimg.com/1200x/ca/b3/86/cab38621200df9f4590b2513a9a96109.jpg" },
+  { id: 403, name: "Denim Skirt with Patchwork", category: "girls", price: 750, image: "https://i.pinimg.com/736x/ba/57/99/ba57990541ed4341df3cb56c351303c2.jpg" },
+  { id: 404, name: "Glittery Party Sandals", category: "girls", price: 1100, image: "https://i.pinimg.com/736x/e5/d2/ec/e5d2ec227385891450abf395e45a90a7.jpg" },
+  { id: 405, name: "Unicorn Print Leggings", category: "girls", price: 499, image: "https://i.pinimg.com/1200x/c4/ca/e4/c4cae44e4460db7c5c074d7145ae6f1c.jpg" },
+  { id: 406, name: "Embroidered Ethnic Lehanga", category: "girls", price: 3200, image: "https://i.pinimg.com/1200x/6c/4d/b8/6c4db8982abab2485120a7e505172eef.jpg" },
+  { id: 407, name: "Woolen Beret Cap", category: "girls", price: 450, image: "https://i.pinimg.com/1200x/a0/7b/3a/a07b3a7f14fdd142c90a0d3e084e6b6f.jpg" },
+  { id: 408, name: "Tulle Skirt Tutu", category: "girls", price: 999, image: "https://i.pinimg.com/736x/ec/65/6e/ec656e3565cebee6ca37d72fae4c7512.jpg" },
+  { id: 409, name: "Lace Trimmed Blouse", category: "girls", price: 799, image: "https://i.pinimg.com/1200x/2e/43/e7/2e43e7de0ca31a3f103f22ee664c872e.jpg" },
+  { id: 410, name: "Star Print Cardigan", category: "girls", price: 1250, image: "https://i.pinimg.com/1200x/83/a2/da/83a2da080f0fb6aee66c758fc993dd02.jpg" },
+  { id: 411, name: "Kids Hair Accessory Set", category: "girls", price: 299, image: "https://i.pinimg.com/736x/84/5a/1e/845a1e2787f1566a8010f05ebde54166.jpg" },
+  { id: 412, name: "Velvet Bow Shoes", category: "girls", price: 950, image: "https://i.pinimg.com/1200x/32/03/41/320341fac95201bbfc77863b78f45720.jpg" },
+
+  // --- KIDS/BABY CATEGORY (12 Products) ---
+  { id: 501, name: "Soft Cotton Romper Set", category: "kids", price: 850, image: "https://i.pinimg.com/736x/fd/e6/54/fde65446634c5104d310692ec9d2761a.jpg" },
+  { id: 502, name: "Newborn Onesie Pack (3)", category: "kids", price: 1199, image: "https://i.pinimg.com/736x/0d/4a/f1/0d4af17e806c0fbba464fb864ba141eb.jpg" },
+  { id: 503, name: "Fleece Baby Blanket", category: "kids", price: 599, image: "https://i.pinimg.com/1200x/cc/e9/14/cce9146319c5f8bf8b3f330ede2f7759.jpg" },
+  { id: 504, name: "Anti-Slip Baby Booties", category: "kids", price: 399, image: "https://i.pinimg.com/1200x/be/cd/20/becd2004c1ae34856f41b5766a505106.jpg" },
+  { id: 505, name: "Silicone Feeding Bibs", category: "kids", price: 450, image: "https://i.pinimg.com/736x/47/69/80/4769801ed4263573068cdfb376acb169.jpg" },
+  { id: 506, name: "Plush Teddy Bear", category: "kids", price: 899, image: "https://i.pinimg.com/1200x/f7/a7/6c/f7a76c048830d0f01cad2c7ca7657f25.jpg" },
+  { id: 507, name: "Infant Winter Cap & Mittens", category: "kids", price: 350, image: "https://i.pinimg.com/1200x/24/fb/4d/24fb4d2fc832818e4af5fb4c6c1e3bc3.jpg" },
+  { id: 508, name: "Bamboo Fiber Nappies", category: "kids", price: 1450, image: "https://i.pinimg.com/736x/4a/3b/fb/4a3bfb668908e659cec6f497562d2969.jpg" },
+  { id: 509, name: "Animal Print Hooded Towel", category: "kids", price: 699, image: "https://i.pinimg.com/1200x/42/48/28/424828033a5752f09b0ec87ec0fc4929.jpg" },
+  { id: 510, name: "Baby Rocker Chair", category: "kids", price: 3200, image: "https://i.pinimg.com/736x/33/72/9b/33729b1341e72b71dabafa513276b226.jpg" },
+  { id: 511, name: "Wooden Educational Block", category: "kids", price: 999, image: "https://i.pinimg.com/736x/99/f5/6a/99f56a13a95347a9dce808e8e47349e2.jpg" },
+  { id: 512, name: "Cotton Swaddle Wraps", category: "kids", price: 750, image: "https://i.pinimg.com/1200x/07/84/81/07848198933127853baae2dfade6dff6.jpg" },
 ];
 
 export const testimonials = [
-  { id: 1, name: "Sarah M.", review: "I just got my first order and I have one word: WOW!!! Love, love, love these clothes." },
-  { id: 2, name: "John D.", review: "Great quality for the price. Will definitely shop here again." }
+  { id: 1, name: "Rick Grimes", review: "I just got my first order and I have one word WOW!!! Love, love, love these clothes. I had my doubts before I ordered because most plus size stores are too small but not this time! The shipping was surprisingly fast, only took about 3 days to get to me." },
+  { id: 2, name: "Aditi Sharma", review: "The Aaraz collection is stunning. The saree I ordered for my sister's wedding is high quality and looks exactly like the photo. Highly recommend the ethnic section!" },
+  { id: 3, name: "Rahul Verma", review: "Great streetwear options. The oversized tees are perfect and the fabric is breathable. Definitely my new favorite store for casuals." },
+  { id: 4, name: "Sneha Kapur", review: "Bought baby onesies and blankets for my newborn. The cotton is so soft and organic. Truly worth the price for the comfort it provides." }
 ];
 
 export const brands = [
-  { id: 1, name: "Brand A", logo: "https://via.placeholder.com/150x80?text=Brand+A" },
-  { id: 2, name: "Brand B", logo: "https://via.placeholder.com/150x80?text=Brand+B" },
-  { id: 3, name: "Brand C", logo: "https://via.placeholder.com/150x80?text=Brand+C" },
-  { id: 4, name: "Brand D", logo: "https://via.placeholder.com/150x80?text=Brand+D" }
+  { id: 1, name: "DIXIEZ", logo: "https://i.pinimg.com/736x/9e/e7/52/9ee752f77512bea38db87fc5da388622.jpg" },
+  { id: 2, name: "Men & Style", logo: "https://i.pinimg.com/736x/7b/4a/11/7b4a11c2b8c04f18cde4e2c87d840373.jpg" },
+  { id: 3, name: "Stussy", logo: "https://i.pinimg.com/736x/9f/d7/e1/9fd7e1253d9ea0c41766a361f6ce7278.jpg" },
+  { id: 4, name: "Le Coq Sportif", logo: "https://i.pinimg.com/1200x/a2/da/99/a2da9900d7d4c7b800040e6b8ef1b3bc.jpg" },
+  { id: 5, name: "ZARA", logo: "https://via.placeholder.com/150x80?text=ZARA" },
+  { id: 6, name: "H&M", logo: "https://i.pinimg.com/736x/9b/0d/b4/9b0db4e3ab8802e91c46d81cef6b9303.jpg" },
+  { id: 7, name: "GUCCI", logo: "https://i.pinimg.com/736x/25/ab/fe/25abfe8ba7ed03373f574c3b1516639d.jpg" },
+  { id: 8, name: "BURBERRY", logo: "https://i.pinimg.com/736x/b7/4b/e3/b74be366bcabb23031af46aba306da96.jpg" },
 ];

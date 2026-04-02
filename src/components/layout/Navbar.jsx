@@ -118,6 +118,11 @@ export default function Navbar() {
                 <span className="flex items-center gap-3"><FaUser className="text-xs" /> My Account</span>
                 <FaChevronRight className="text-[10px] opacity-30" />
               </Link>
+
+              <Link to="/about" onClick={closeMenu} className="flex items-center justify-between px-4 py-4 border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-primary transition-colors">
+                <span className="flex items-center gap-3 font-medium">About Us</span>
+                <FaChevronRight className="text-[10px] opacity-30" />
+              </Link>
               
               <Link to="/checkout" onClick={closeMenu} className="flex items-center justify-between px-4 py-4 border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-primary transition-colors">
                 <span className="flex items-center gap-3"><FaCreditCard className="text-xs" /> Checkout</span>
