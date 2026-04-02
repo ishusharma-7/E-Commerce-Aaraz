@@ -77,10 +77,10 @@ export const products = [
 ];
 
 export const testimonials = [
-  { id: 1, name: "Rick Grimes", review: "I just got my first order and I have one word WOW!!! Love, love, love these clothes. I had my doubts before I ordered because most plus size stores are too small but not this time! The shipping was surprisingly fast, only took about 3 days to get to me." },
-  { id: 2, name: "Aditi Sharma", review: "The Aaraz collection is stunning. The saree I ordered for my sister's wedding is high quality and looks exactly like the photo. Highly recommend the ethnic section!" },
-  { id: 3, name: "Rahul Verma", review: "Great streetwear options. The oversized tees are perfect and the fabric is breathable. Definitely my new favorite store for casuals." },
-  { id: 4, name: "Sneha Kapur", review: "Bought baby onesies and blankets for my newborn. The cotton is so soft and organic. Truly worth the price for the comfort it provides." }
+  { id: 1, name: "Rick Grimes", review: "I just got my first order and I have one word WOW!!! BEST ! BEST ! Best fabric ofs these clothes. Great collections , I am always surprice with their trendy collection! ", image: "https://i.pinimg.com/736x/f0/24/b3/f024b316305ab3cc8423326fa2d60035.jpg" },
+  { id: 2, name: "Aditi Sharma", review: "The Aaraz collection is stunning. The saree I ordered for my sister's wedding is high quality and looks exactly like the photo. Highly recommend the ethnic section!", image: "https://i.pinimg.com/736x/ab/70/92/ab7092c8360bc35d6d224317b95f26dd.jpg" },
+  { id: 3, name: "Rahul Verma", review: "Great streetwear options. The oversized tees are perfect and the fabric is breathable. Definitely my new favorite store for casuals.", image: "https://i.pinimg.com/736x/8f/40/9e/8f409e892ada9b5b5dea6dfaee36611e.jpg" },
+  { id: 4, name: "Sneha Kapur", review: "Bought baby onesies and blankets for my newborn. The cotton is so soft and organic. Truly worth the price for the comfort it provides.", image: "https://i.pinimg.com/736x/66/57/c3/6657c3e1136201afe6d2b01b74279eec.jpg" }
 ];
 
 export const brands = [

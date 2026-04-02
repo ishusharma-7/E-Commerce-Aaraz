@@ -11,14 +11,14 @@ export default function Footer() {
         <div>
           <h3 className="text-pink-400 font-semibold mb-4 uppercase">Important Links</h3>
           <ul className="space-y-2 text-sm">
-            <li><Link to="/">Terms & Conditions</Link></li>
-            <li><Link to="/">Privacy Policy</Link></li>
+            <li><Link to="/terms">Terms & Conditions</Link></li>
+            <li><Link to="/privacy">Privacy Policy</Link></li>
           </ul>
         </div>
         <div>
           <h3 className="text-pink-400 font-semibold mb-4 uppercase">Customer Blogs</h3>
           <ul className="space-y-2 text-sm">
-            <li><Link to="/">Blogs & Reviews</Link></li>
+            <li><Link to="/blogs">Blogs & Reviews</Link></li>
           </ul>
         </div>
       </div>

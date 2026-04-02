@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion';
 import { FaInstagram, FaLaptopCode, FaRocket, FaHandshake } from 'react-icons/fa';
+import devPhoto from '../assets/ishu.jpg';
 
 export default function About() {
   const socialLinks = {
-    instagram: "https://instagram.com/your_username", // Replace with your actual link
+    instagram: "https://www.instagram.com/ishu.sharma_7", // Replace with your actual link
   };
 
   return (
@@ -49,7 +50,7 @@ export default function About() {
         
         <div className="relative z-10 flex flex-col md:flex-row items-center gap-10">
           <div className="w-32 h-32 rounded-full border-4 border-primary overflow-hidden shadow-2xl">
-            <img src="https://i.pravatar.cc/150?u=ishu" alt="Ishu Sharma" /> 
+            <img src={devPhoto} alt="Ishu Sharma" /> 
           </div>
           
           <div className="space-y-4 text-center md:text-left">

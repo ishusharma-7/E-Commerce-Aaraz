@@ -219,7 +219,7 @@ export default function Home() {
                 <div className="mb-10 flex justify-center">
                    <div className="p-1 rounded-full bg-gradient-to-tr from-primary to-blue-500 shadow-2xl">
                       <div className="w-24 h-24 rounded-full border-4 border-gray-900 overflow-hidden">
-                         <img src={`https://i.pravatar.cc/150?u=${t.id}`} alt={t.name} />
+                         <img src={t.image} alt={t.name} />
                       </div>
                    </div>
                 </div>
