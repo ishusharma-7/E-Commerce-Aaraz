@@ -17,7 +17,7 @@ export default function ProductCard({ product }) {
       </div>
       <div className="p-4 text-center">
         <h3 className="text-gray-800 dark:text-gray-200 font-medium truncate">{product.name}</h3>
-        <p className="text-primary font-bold mt-2">${product.price.toFixed(2)}</p>
+        <p className="text-primary font-bold mt-2">₹{product.price.toLocaleString('en-IN')}</p>
         <button onClick={() => addToCart(product)} className="mt-4 w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded flex items-center justify-center gap-2">
           <FaShoppingCart /> Add to Cart
         </button>

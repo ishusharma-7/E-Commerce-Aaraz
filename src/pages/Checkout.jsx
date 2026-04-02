@@ -21,7 +21,7 @@ export default function Checkout() {
     <div className="max-w-2xl mx-auto bg-white dark:bg-gray-800 p-8 shadow-lg rounded-lg">
       <h2 className="text-2xl font-bold mb-6 dark:text-white border-b pb-4">Checkout</h2>
       <div className="mb-6 dark:text-white">
-        <h3 className="text-lg font-semibold mb-2">Order Total: ${total.toFixed(2)}</h3>
+        <h3 className="text-lg font-semibold mb-2">Order Total: ₹{total.toLocaleString('en-IN')}</h3>
       </div>
       <textarea className="w-full p-3 border rounded-md mb-6 dark:bg-gray-700 dark:text-white" rows="3" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Shipping Address"></textarea>
       <button onClick={handleConfirmOrder} className="w-full bg-primary text-white py-3 rounded-md font-bold">Confirm Order (COD)</button>

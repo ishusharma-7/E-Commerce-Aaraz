@@ -15,7 +15,7 @@ export default function Wishlist() {
             <img src={item.image} alt={item.name} className="w-full h-56 object-cover" />
             <div className="p-4 text-center">
               <h3 className="dark:text-white">{item.name}</h3>
-              <p className="text-primary font-bold">${item.price}</p>
+              <p className="text-primary font-bold">₹{item.price}</p>
               <button onClick={() => addToCart(item)} className="mt-4 w-full bg-blue-500 text-white py-2 rounded flex justify-center items-center gap-2"><FaShoppingCart /> Add</button>
             </div>
           </div>
