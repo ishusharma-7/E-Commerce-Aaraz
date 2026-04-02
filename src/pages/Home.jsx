@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation, EffectFade } from 'swiper/modules';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion'; // Added AnimatePresence
+import { useState, useEffect } from 'react'; // Added hooks for scroll logic
+import { FaChevronUp } from 'react-icons/fa'; // Icon for upward navigation
 import ProductCard from '../components/ui/ProductCard';
 import { products, testimonials, brands } from '../utils/mockData';
 
@@ -14,7 +16,22 @@ import 'swiper/css/effect-fade';
 export default function Home() {
   const getProductsByCategory = (category) => products.filter(p => p.category === category);
 
-  // Added Image Mapping for Circular Categories
+  // --- Scroll to Top Logic ---
+  const [showScroll, setShowScroll] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 400) setShowScroll(true);
+      else setShowScroll(false);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const categoryImages = {
     Mens: "https://i.pinimg.com/originals/07/96/f1/0796f14dcd4b05bed07d2cd97263181d.jpg",
     Womens: "https://tse2.mm.bing.net/th/id/OIP.Nn2Wi7IVDdmizKvTpT6QMQHaLH?w=824&h=1236&rs=1&pid=ImgDetMain&o=7&rm=3",
@@ -24,59 +41,13 @@ export default function Home() {
   };
 
   const heroSlides = [
-    {
-      id: 'mens',
-      title: "MEN'S",
-      subtitle: "STREET STYLE",
-      offer: "UP TO 40% OFF",
-      btnText: "SHOP COLLECTION",
-      bgColor: "bg-slate-100",
-      img: "https://images.unsplash.com/photo-1488161628813-04466f872be2?q=80&w=1528&auto=format&fit=crop",
-      textColor: "text-blue-600"
-    },
-    {
-      id: 'womens',
-      title: "WOMEN'S",
-      subtitle: "SUMMER CHIC",
-      offer: "NEW ARRIVALS",
-      btnText: "EXPLORE NOW",
-      bgColor: "bg-rose-50",
-      img: "https://i.pinimg.com/736x/c9/b7/9b/c9b79b1810298b97157574e7d62a5c92.jpg",
-      textColor: "text-primary"
-    },
-    {
-      id: 'boys',
-      title: "BOY'S",
-      subtitle: "PLAYTIME READY",
-      offer: "BUY 2 GET 1 FREE",
-      btnText: "VIEW BOYS",
-      bgColor: "bg-blue-50",
-      img: "https://i.pinimg.com/736x/01/d3/30/01d3308f6bb69f975644d16f2fb47002.jpg",
-      textColor: "text-blue-500"
-    },
-    {
-      id: 'girls',
-      title: "GIRL'S",
-      subtitle: "PARTY SEASON",
-      offer: "FESTIVE DEALS",
-      btnText: "SHOP GIRLS",
-      bgColor: "bg-purple-50",
-      img: "https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?q=80&w=1470&auto=format&fit=crop",
-      textColor: "text-purple-500"
-    },
-    {
-      id: 'kids',
-      title: "BABY & KIDS",
-      subtitle: "COZY COMFORT",
-      offer: "SOFT ORGANIC COTTON",
-      btnText: "SHOP INFANTS",
-      bgColor: "bg-yellow-50",
-      img: "https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=1470&auto=format&fit=crop",
-      textColor: "text-amber-600"
-    }
+    { id: 'mens', title: "MEN'S", subtitle: "STREET STYLE", offer: "UP TO 40% OFF", btnText: "SHOP COLLECTION", bgColor: "bg-slate-100", img: "https://images.unsplash.com/photo-1488161628813-04466f872be2?q=80&w=1528&auto=format&fit=crop", textColor: "text-blue-600" },
+    { id: 'womens', title: "WOMEN'S", subtitle: "SUMMER CHIC", offer: "NEW ARRIVALS", btnText: "EXPLORE NOW", bgColor: "bg-rose-50", img: "https://i.pinimg.com/736x/c9/b7/9b/c9b79b1810298b97157574e7d62a5c92.jpg", textColor: "text-primary" },
+    { id: 'boys', title: "BOY'S", subtitle: "PLAYTIME READY", offer: "BUY 2 GET 1 FREE", btnText: "VIEW BOYS", bgColor: "bg-blue-50", img: "https://i.pinimg.com/736x/01/d3/30/01d3308f6bb69f975644d16f2fb47002.jpg", textColor: "text-blue-500" },
+    { id: 'girls', title: "GIRL'S", subtitle: "PARTY SEASON", offer: "FESTIVE DEALS", btnText: "SHOP GIRLS", bgColor: "bg-purple-50", img: "https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?q=80&w=1470&auto=format&fit=crop", textColor: "text-purple-500" },
+    { id: 'kids', title: "BABY & KIDS", subtitle: "COZY COMFORT", offer: "SOFT ORGANIC COTTON", btnText: "SHOP INFANTS", bgColor: "bg-yellow-50", img: "https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=1470&auto=format&fit=crop", textColor: "text-amber-600" }
   ];
 
-  // Helper to render a Product Category Slider
   const CategoryProductSlider = ({ title, category }) => (
     <section>
       <div className="flex items-end justify-between mb-8 border-b-2 border-gray-100 dark:border-gray-800 pb-4">
@@ -91,16 +62,9 @@ export default function Home() {
         spaceBetween={25}
         slidesPerView={1}
         navigation
-        loop={true} // Enabled Endless Loop
-        autoplay={{ 
-          delay: 3500, 
-          disableOnInteraction: false,
-          pauseOnMouseEnter: true 
-        }}
-        breakpoints={{
-          640: { slidesPerView: 2 },
-          1024: { slidesPerView: 4 },
-        }}
+        loop={true}
+        autoplay={{ delay: 3500, disableOnInteraction: false, pauseOnMouseEnter: true }}
+        breakpoints={{ 640: { slidesPerView: 2 }, 1024: { slidesPerView: 4 } }}
       >
         {getProductsByCategory(category).map(product => (
           <SwiperSlide key={product.id}>
@@ -112,9 +76,24 @@ export default function Home() {
   );
 
   return (
-    <div className="space-y-20">
+    <div className="space-y-20 relative">
       
-      {/* --- HERO SECTION: BANNERS --- */}
+      {/* --- MOBILE UPWARD NAVIGATION (Burger Scrolling Option) --- */}
+      <AnimatePresence>
+        {showScroll && (
+          <motion.button
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            onClick={scrollToTop}
+            className="md:hidden fixed bottom-6 right-6 z-[60] bg-primary text-white p-4 rounded-full shadow-2xl border-2 border-white dark:border-gray-700 active:scale-90 transition-transform"
+          >
+            <FaChevronUp size={20} />
+          </motion.button>
+        )}
+      </AnimatePresence>
+
+      {/* --- HERO SECTION --- */}
       <section className="flex flex-col lg:flex-row gap-4 h-auto lg:h-[500px]">
         <div className="w-full lg:w-[70%] h-[350px] lg:h-full rounded-2xl overflow-hidden shadow-2xl border dark:border-gray-700">
           <Swiper
@@ -131,7 +110,7 @@ export default function Home() {
                 <div className={`relative h-full w-full ${slide.bgColor} dark:bg-gray-800 flex items-center px-8 lg:px-16 overflow-hidden`}>
                    <motion.div initial={{ x: -50, opacity: 0 }} whileInView={{ x: 0, opacity: 1 }} transition={{ duration: 0.8 }} className="z-10 max-w-lg space-y-4">
                       <h3 className={`${slide.textColor} font-black tracking-[0.3em] uppercase text-sm`}>{slide.offer}</h3>
-                      <h2 className="text-5xl lg:text-7xl font-black text-gray-900 dark:text-white leading-[0.9]">
+                      <h2 className="text-4xl lg:text-7xl font-black text-gray-900 dark:text-white leading-[0.9]">
                         {slide.title} <br/> 
                         <span className="text-2xl lg:text-4xl font-light tracking-tight text-gray-500 dark:text-gray-400">{slide.subtitle}</span>
                       </h2>
@@ -166,39 +145,40 @@ export default function Home() {
         </div>
       </section>
 
-      {/* --- CATEGORY CIRCULAR SWIPER --- */}
-      <section className="py-12 bg-gray-100/50 dark:bg-gray-800/30 rounded-[3rem] p-8 border border-white dark:border-gray-800 shadow-inner">
+      {/* --- CATEGORY CIRCULAR SWIPER (FIXED OVERLAP) --- */}
+      <section className="py-12 bg-gray-100/50 dark:bg-gray-800/30 rounded-[3rem] p-4 md:p-8 border border-white dark:border-gray-800 shadow-inner">
         <div className="text-center mb-10">
             <h4 className="text-primary font-bold tracking-[0.4em] uppercase text-xs mb-2">Discover</h4>
-            <h2 className="text-4xl font-black text-gray-800 dark:text-white uppercase tracking-tighter">Shop by Category</h2>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-800 dark:text-white uppercase tracking-tighter">Shop by Category</h2>
         </div>
 
         <Swiper 
           modules={[Autoplay]} 
-          spaceBetween={30} 
-          slidesPerView={2} 
+          spaceBetween={15} // Reduced space for mobile
+          slidesPerView={2.2} // Show a partial slide to indicate scrollability
           autoplay={{ delay: 3000 }} 
-          loop={true} // Enabled Endless Loop
-          breakpoints={{ 640: { slidesPerView: 3 }, 1024: { slidesPerView: 5 } }}
+          loop={true}
+          breakpoints={{ 640: { slidesPerView: 3, spaceBetween: 20 }, 1024: { slidesPerView: 5, spaceBetween: 30 } }}
         >
           {['Mens', 'Womens', 'Boys', 'Girls', 'Kids'].map(cat => (
             <SwiperSlide key={cat}>
               <Link to={`/category/${cat.toLowerCase()}`} className="group block text-center">
-                <div className="relative aspect-square rounded-full overflow-hidden border-8 border-white dark:border-gray-700 shadow-2xl mx-auto w-44 h-44 mb-4">
+                {/* Responsive Image size: w-28 on mobile, w-44 on desktop */}
+                <div className="relative aspect-square rounded-full overflow-hidden border-4 md:border-8 border-white dark:border-gray-700 shadow-xl mx-auto w-28 h-28 md:w-44 md:h-44 mb-4">
                   <img 
                     src={categoryImages[cat]} 
                     alt={cat} 
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
                   />
                 </div>
-                <h3 className="font-black text-gray-800 dark:text-white group-hover:text-primary transition-colors text-lg uppercase">{cat}</h3>
+                <h3 className="font-black text-gray-800 dark:text-white group-hover:text-primary transition-colors text-sm md:text-lg uppercase">{cat}</h3>
               </Link>
             </SwiperSlide>
           ))}
         </Swiper>
       </section>
 
-      {/* --- PRODUCT AUTO-SLIDERS FOR ALL CATEGORIES --- */}
+      {/* --- PRODUCT AUTO-SLIDERS --- */}
       <div className="space-y-24">
         <CategoryProductSlider title="Men's Top Section" category="mens" />
         <CategoryProductSlider title="Women's Hub" category="womens" />
@@ -206,24 +186,24 @@ export default function Home() {
         <CategoryProductSlider title="Girl's Selection" category="girls" />
       </div>
 
-      {/* --- TESTIMONIAL SLIDER WITH UNIQUE PHOTOS --- */}
-      <section className="relative py-28 bg-gray-900 rounded-[4rem] overflow-hidden shadow-2xl">
+      {/* --- TESTIMONIALS --- */}
+      <section className="relative py-28 bg-gray-900 rounded-[3rem] md:rounded-[4rem] overflow-hidden shadow-2xl">
         <div className="absolute inset-0 opacity-20 grayscale scale-110">
            <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1470&auto=format&fit=crop" className="w-full h-full object-cover" alt="Fashion Store" />
         </div>
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
-          <h2 className="text-4xl font-black text-primary mb-12 uppercase tracking-tighter">Customer Reviews</h2>
+          <h2 className="text-3xl md:text-4xl font-black text-primary mb-12 uppercase tracking-tighter">Customer Reviews</h2>
           <Swiper modules={[Autoplay, Pagination]} autoplay={{ delay: 5000 }} loop={true} pagination={{ clickable: true }}>
-            {testimonials.map((t, index) => (
+            {testimonials.map((t) => (
               <SwiperSlide key={t.id} className="pb-14">
                 <div className="mb-10 flex justify-center">
                    <div className="p-1 rounded-full bg-gradient-to-tr from-primary to-blue-500 shadow-2xl">
-                      <div className="w-24 h-24 rounded-full border-4 border-gray-900 overflow-hidden">
-                         <img src={t.image} alt={t.name} />
+                      <div className="w-20 h-20 md:w-24 md:h-24 rounded-full border-4 border-gray-900 overflow-hidden">
+                         <img src={t.image} alt={t.name} className="w-full h-full object-cover" />
                       </div>
                    </div>
                 </div>
-                <p className="text-xl md:text-3xl italic leading-relaxed text-gray-100 font-light px-4">"{t.review}"</p>
+                <p className="text-lg md:text-3xl italic leading-relaxed text-gray-100 font-light px-4">"{t.review}"</p>
                 <div className="mt-8">
                     <h4 className="font-black uppercase tracking-[0.3em] text-white">— {t.name}</h4>
                     <p className="text-xs text-primary font-bold mt-1 uppercase">Verified Customer</p>
@@ -236,18 +216,11 @@ export default function Home() {
 
       {/* --- BRAND SLIDER --- */}
       <section className="py-16">
-        <Swiper 
-          modules={[Autoplay]} 
-          spaceBetween={50} 
-          slidesPerView={3} 
-          autoplay={{ delay: 2000 }} 
-          loop={true} // Enabled Endless Loop
-          breakpoints={{ 768: { slidesPerView: 4 }, 1024: { slidesPerView: 6 } }}
-        >
+        <Swiper modules={[Autoplay]} spaceBetween={20} slidesPerView={3} autoplay={{ delay: 2000 }} loop={true} breakpoints={{ 768: { slidesPerView: 4 }, 1024: { slidesPerView: 6 } }}>
           {brands.map(brand => (
             <SwiperSlide key={brand.id}>
-              <div className="flex justify-center items-center h-24 opacity-30 hover:opacity-100 transition-all cursor-pointer">
-                 <img src={brand.logo} alt={brand.name} className="max-h-12 grayscale hover:grayscale-0" />
+              <div className="flex justify-center items-center h-16 md:h-24 opacity-30 hover:opacity-100 transition-all cursor-pointer">
+                 <img src={brand.logo} alt={brand.name} className="max-h-8 md:max-h-12 grayscale hover:grayscale-0" />
               </div>
             </SwiperSlide>
           ))}

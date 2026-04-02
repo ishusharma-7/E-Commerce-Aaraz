@@ -10,20 +10,33 @@ export default function ProductCard({ product }) {
   const isWishlisted = wishlist.some(item => item.id === product.id);
 
   // Function to handle instant purchase
-  const handleBuyNow = () => {
+  const handleBuyNow = (e) => {
+    e.stopPropagation(); // Prevents card navigation
     clearCart(); // Clear current cart to focus on this single product
     addToCart(product); // Add the specific product
     navigate('/checkout'); // Redirect to checkout instantly
   };
 
+  // Helper functions to stop event bubbling
+  const handleWishlist = (e) => {
+    e.stopPropagation();
+    toggleWishlist(product);
+  };
+
+  const handleAddToCart = (e) => {
+    e.stopPropagation();
+    addToCart(product);
+  };
+
   return (
     <motion.div 
       whileHover={{ y: -8 }} 
-      className="bg-white dark:bg-gray-800 rounded-3xl shadow-lg overflow-hidden relative group border border-transparent hover:border-primary/20 transition-all duration-300"
+      onClick={() => navigate(`/product/${product.id}`)} // Navigate on card click
+      className="bg-white dark:bg-gray-800 rounded-3xl shadow-lg overflow-hidden relative group border border-transparent hover:border-primary/20 transition-all duration-300 cursor-pointer"
     >
       {/* Wishlist Button */}
       <button 
-        onClick={() => toggleWishlist(product)} 
+        onClick={handleWishlist} 
         className="absolute top-3 right-3 z-10 p-2.5 bg-white/90 dark:bg-gray-900/90 rounded-full hover:scale-110 transition-transform shadow-md"
       >
         <FaHeart className={isWishlisted ? "text-red-500" : "text-gray-400"} />
@@ -52,7 +65,7 @@ export default function ProductCard({ product }) {
         <div className="flex gap-2 mt-5">
           {/* Add to Cart Button */}
           <button 
-            onClick={() => addToCart(product)} 
+            onClick={handleAddToCart} 
             className="flex-1 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white py-3 rounded-xl flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-widest hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
           >
             <FaShoppingCart className="text-blue-500" /> Cart

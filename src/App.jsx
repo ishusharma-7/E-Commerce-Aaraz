@@ -13,6 +13,7 @@ import About from './pages/About';
 import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
 import Blogs from './pages/Blogs';
+import ProductDetails from './pages/ProductDetails';
 
 export default function App() {
   return (
@@ -33,6 +34,7 @@ export default function App() {
               <Route path="/terms" element={<Terms />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/blogs" element={<Blogs />} />
+              <Route path="/product/:id" element={<ProductDetails />} />
             </Routes>
           </main>
           <Footer />

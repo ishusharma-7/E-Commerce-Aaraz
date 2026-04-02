@@ -88,7 +88,7 @@ export const brands = [
   { id: 2, name: "Men & Style", logo: "https://i.pinimg.com/736x/7b/4a/11/7b4a11c2b8c04f18cde4e2c87d840373.jpg" },
   { id: 3, name: "Stussy", logo: "https://i.pinimg.com/736x/9f/d7/e1/9fd7e1253d9ea0c41766a361f6ce7278.jpg" },
   { id: 4, name: "Le Coq Sportif", logo: "https://i.pinimg.com/1200x/a2/da/99/a2da9900d7d4c7b800040e6b8ef1b3bc.jpg" },
-  { id: 5, name: "ZARA", logo: "https://via.placeholder.com/150x80?text=ZARA" },
+  { id: 5, name: "ZARA", logo: "https://i.pinimg.com/1200x/a3/a8/0c/a3a80c0520bb4ae9bc7eaa3308869919.jpg" },
   { id: 6, name: "H&M", logo: "https://i.pinimg.com/736x/9b/0d/b4/9b0db4e3ab8802e91c46d81cef6b9303.jpg" },
   { id: 7, name: "GUCCI", logo: "https://i.pinimg.com/736x/25/ab/fe/25abfe8ba7ed03373f574c3b1516639d.jpg" },
   { id: 8, name: "BURBERRY", logo: "https://i.pinimg.com/736x/b7/4b/e3/b74be366bcabb23031af46aba306da96.jpg" },
