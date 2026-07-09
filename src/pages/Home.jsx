@@ -37,7 +37,7 @@ export default function Home() {
     Womens: "https://tse2.mm.bing.net/th/id/OIP.Nn2Wi7IVDdmizKvTpT6QMQHaLH?w=824&h=1236&rs=1&pid=ImgDetMain&o=7&rm=3",
     Boys: "https://tse3.mm.bing.net/th/id/OIP.z8vNqY2I8ZUFiy3a9FWHwAAAAA?rs=1&pid=ImgDetMain&o=7&rm=3",
     Girls: "https://i.pinimg.com/originals/ad/4d/69/ad4d69c8c90e9ea21164de31d664aa63.jpg",
-    Kids: "https://tse1.explicit.bing.net/th/id/OIP.B5uIf_OAI0jEU2T0wRWyBgHaJ4?rs=1&pid=ImgDetMain&o=7&rm=3"
+    Kids: "https://img.freepik.com/premium-photo/cute-baby-overalls-display-white-background_1033130-3015.jpg"
   };
 
   const heroSlides = [
